@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  dashboard:
+    build: .
+    container_name: attack-dashboard
+    restart: unless-stopped
+    ports:
+      - "8501:8501"
+    environment:
+      - ATTACK_DB_PATH=/data/dashboard.db
+    volumes:
+      - dashboard_data:/data
+      - ./data/sample_rules:/app/data/sample_rules:ro
+
+volumes:
+  dashboard_data:
